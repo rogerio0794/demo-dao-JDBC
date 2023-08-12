@@ -54,21 +54,11 @@ public class SellerDaoJDBC implements SellerDao {
 			rs = st.executeQuery(); // Aqui eu tenho a tabela, eu preciso dos objetos instanciados em memória!
 			
 			// Na posição 1 temos um objeto
-			if (rs.next()) {
+			if (rs.next()) {				
 				// Se entrou, significa que o rs retornou uma linha da consulta
-				Department depAux = new Department();
-				depAux.setId(rs.getInt("DepartmentId")); // Pegando o id do departamento
-				depAux.setName(rs.getString("DepName")); // Pegando o nome do departamento
-				
-				Seller obj = new Seller();
-				obj.setId(rs.getInt("Id"));  // Os argumentos em "" são os nomes das colunas das tabelas no DB
-				obj.setName(rs.getString("Name"));
-				obj.setEmail(rs.getString("Email"));
-				obj.setBaseSalary(rs.getDouble("BaseSalary"));
-				obj.setBirthDate(rs.getDate("BirthDate"));
-				obj.setDepartment(depAux);
-				return obj;
-				
+				Department depAux = instantiateDepartment(rs);		// Utilizando metodos pois vão ser reutilizados		
+				Seller obj = instantiateSeller(rs, depAux); 
+				return obj;				
 			}
 			return null;
 					
@@ -82,9 +72,47 @@ public class SellerDaoJDBC implements SellerDao {
 		
 	}
 
+	private Seller instantiateSeller(ResultSet rs, Department depAux) throws SQLException {
+		Seller obj = new Seller();
+		obj.setId(rs.getInt("Id"));  // Os argumentos em "" são os nomes das colunas das tabelas no DB
+		obj.setName(rs.getString("Name"));
+		obj.setEmail(rs.getString("Email"));
+		obj.setBaseSalary(rs.getDouble("BaseSalary"));
+		obj.setBirthDate(rs.getDate("BirthDate"));
+		obj.setDepartment(depAux);
+		return obj;
+	}
+
+	private Department instantiateDepartment(ResultSet rs) throws SQLException {
+		Department depAux = new Department();
+		depAux.setId(rs.getInt("DepartmentId")); // Pegando o id do departamento
+		depAux.setName(rs.getString("DepName")); // Pegando o nome do departamento
+		// As exceções vão ser tratatas  em findById.
+		return depAux;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	@Override
 	public List<Seller> findall() {
 		return null;
 	}
+	
+	 
+	
+	
+	
+	
+	
+	
+	
 
 }
