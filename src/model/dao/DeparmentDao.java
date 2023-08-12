@@ -17,7 +17,12 @@ public interface DeparmentDao {
 	void deleById(Integer id);
 	
 	// Encontrar obj via id
-	Department findById(Integer id);	
+	Department findById(Integer id);
+	
+	
+	
+	
+	
 	
 	// Retornar todos os departamentos
 	List<Department> findall();
