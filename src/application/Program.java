@@ -22,7 +22,7 @@ public class Program {
 		Seller seller = sellerDao.findById(3);		
 		System.out.println(seller);
 		
-		
+		System.out.println();
 		System.out.println("=== Teste 2: seller findByDepartment ====");
 		Department department = new Department(2,null);
 		List<Seller> list = sellerDao.findByDepartment(department);		
@@ -32,6 +32,13 @@ public class Program {
 		}
 		
 		
+		System.out.println();
+		System.out.println("=== Teste 3: seller findAll ====");
+		List<Seller> list1 = sellerDao.findAll();		
+		
+		for (Seller obj: list1) {
+			System.out.println(obj);
+		}
 		
 		
 		

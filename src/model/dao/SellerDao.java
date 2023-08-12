@@ -20,7 +20,7 @@ public interface SellerDao {
 	Seller findById(Integer id);	
 	
 	// Retornar todos os vendedores
-	List<Seller> findall();
+	List<Seller> findAll();
 	
 	// Retornar os vendedores por departamento
 	List<Seller> findByDepartment(Department department);

@@ -25,7 +25,7 @@ public interface DeparmentDao {
 	
 	
 	// Retornar todos os departamentos
-	List<Department> findall();
+	List<Department> findAll();
 	
 	
 	
