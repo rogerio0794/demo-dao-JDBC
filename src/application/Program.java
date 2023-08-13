@@ -47,12 +47,28 @@ public class Program {
 		sellerDao.insert(newSeller);
 		System.out.println("Inserido! Novo Id = " + newSeller.getId());
 		
+		
+		
 		System.out.println();
 		System.out.println("=== Teste 5: seller update ====");
 		seller = sellerDao.findById(1); // pegando o vendedor com id 1
 		seller.setName("Ronaldo"); // Atualizando o nome
 		sellerDao.update(seller);
 		System.out.println("Atualizado! Novo nome = " + seller.getName());
+		
+		
+		
+		System.out.println();
+		System.out.println("=== Teste 6: seller delete ====");
+		int idDelete = 17;
+		sellerDao.deleById(idDelete);
+		
+		
+		
+		
+		
+		
+		
 
 	}
 

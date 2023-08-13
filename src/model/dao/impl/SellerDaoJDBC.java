@@ -79,7 +79,7 @@ public class SellerDaoJDBC implements SellerDao {
 	@Override
 	public void update(Seller obj) {
 		
-PreparedStatement st = null;
+		PreparedStatement st = null;
 		
 		String query = "UPDATE seller "
 				+ "SET Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ? "
@@ -108,6 +108,40 @@ PreparedStatement st = null;
 
 	@Override
 	public void deleById(Integer id) {
+		
+		PreparedStatement st = null;
+		
+		String query = "DELETE FROM seller "
+				+ "WHERE Id = ?";
+		
+		try {
+			st = conn.prepareStatement(query);		
+			
+			st.setInt(1, id);
+			
+			
+			// Se deletar alguma linha vai obter o numero das linhas
+			int rows = st.executeUpdate();
+			
+			if (rows > 0) {
+				System.out.println("Deletado com sucesso!");
+			} else {
+				throw new DbException("Id não encontrado!");
+			}
+			
+			
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);			
+		}
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 
