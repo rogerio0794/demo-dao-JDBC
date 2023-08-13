@@ -25,8 +25,8 @@ public class Program {
 		
 		System.out.println();
 		System.out.println("=== Teste 2: seller findByDepartment ====");
-		Department department = new Department(2,null);
-		List<Seller> list = sellerDao.findByDepartment(department);		
+		Department department = new Department(2,null); // Departamento Electronics
+		List<Seller> list = sellerDao.findByDepartment(department);	// Criando a lista de todos os vendedores deste departamento	
 		
 		for (Seller obj: list) {
 			System.out.println(obj);
@@ -45,10 +45,14 @@ public class Program {
 		System.out.println("=== Teste 4: seller insert ====");
 		Seller newSeller = new Seller(null, "Greg", "greg@gmail.com", new Date(), 4000.0, department   );
 		sellerDao.insert(newSeller);
-		System.out.println("Inserido! Noco Id = " + newSeller.getId());
+		System.out.println("Inserido! Novo Id = " + newSeller.getId());
 		
-		
-		
+		System.out.println();
+		System.out.println("=== Teste 5: seller update ====");
+		seller = sellerDao.findById(1); // pegando o vendedor com id 1
+		seller.setName("Ronaldo"); // Atualizando o nome
+		sellerDao.update(seller);
+		System.out.println("Atualizado! Novo nome = " + seller.getName());
 
 	}
 
