@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.entities.Department;
 
-public interface DeparmentDao {
+public interface DepartmentDao {
 	
 	
 	// Metodo para inserção do obj no banco de dados
@@ -18,10 +18,6 @@ public interface DeparmentDao {
 	
 	// Encontrar obj via id
 	Department findById(Integer id);
-	
-	
-	
-	
 	
 	
 	// Retornar todos os departamentos

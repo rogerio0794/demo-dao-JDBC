@@ -60,7 +60,7 @@ public class Program {
 		
 		System.out.println();
 		System.out.println("=== Teste 6: seller delete ====");
-		int idDelete = 17;
+		int idDelete = 19;
 		sellerDao.deleById(idDelete);
 		
 		
