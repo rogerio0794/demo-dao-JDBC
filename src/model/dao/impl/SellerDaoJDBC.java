@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,51 @@ public class SellerDaoJDBC implements SellerDao {
 
 	@Override
 	public void insert(Seller obj) {
+		
+		
+		PreparedStatement st = null;
+		
+		String query = "INSERT INTO seller "
+				+ "(Name, Email, BirthDate, BaseSalary, DepartmentId) "
+				+ "VALUES "
+				+ "(?, ?, ?, ?, ?)";
+		
+		try {
+			st  = conn.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+			st.setString(1, obj.getName());
+			st.setString(2, obj.getEmail());
+			st.setDate(3,  new java.sql.Date(obj.getBirthDate().getTime())  );
+			st.setDouble(4, obj.getBaseSalary());
+			st.setInt(5, obj.getDepartment().getId()); //ID do departamento não do vendedor
+			
+			// Numero de linhas criadas pela iserção
+			int rowAffected = st.executeUpdate();
+			
+			if (rowAffected > 0) {
+				// Inseriu algo
+				ResultSet rs = st.getGeneratedKeys(); // pegando as chaves
+				if (rs.next()) {
+					int id = rs.getInt(1); // linha 1 é onde esta o id, por isso o rs.next para sair da linha 0 para 1
+					obj.setId(id);
+				}
+				DB.closeResultSet(rs);
+			} else {
+				throw new DbException("Erro inesperado, nenhuma linha foi afetada");
+			}
+			
+			
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(st);			
+		}
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 
